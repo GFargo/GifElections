@@ -5,10 +5,10 @@
 	</title>
 </head>
 <template name="layout">
-	{{> FreeLayout}}
+	{{> PublicLayout}}
 </template>
 
-<template name="FreeLayout">
+<template name="PublicLayout">
 	<div id="wrap">
 		<div class="navbar navbar-fixed-top navbar-default" role="navigation">
 			<div class="navbar-container container">
@@ -29,7 +29,7 @@
 					</a>
 				</div>
 				<div id="menu" class="collapse navbar-collapse">
-					{{> FreeLayoutMainMenu}}
+					{{> PublicLayoutMainMenu}}
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 	</div>
 </template>
 
-<template name="FreeLayoutMainMenu">
+<template name="PublicLayoutMainMenu">
 	<ul id="menu-items" class="nav navbar-nav">
 		<li id="menu-item-simple" class="{{menuItemClass 'home'}}">
 			<a href="{{pathFor 'home'}}">

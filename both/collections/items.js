@@ -14,37 +14,51 @@ this.Items.userCanRemove = function(userId, doc) {
 
 this.Schemas = this.Schemas || {};
 
+///////////////
+// FIELDS
+///////////////
+
+//     X dateCreated: New Date,
+//     X tweetContent: String => ‘text’
+//     X tweetGif: URL => Function() parse tweet content for URL with `.gif`ending
+//     X tweetAuthor: String => ‘user’
+//     X tweetDate: Date => ‘created_at’
+//     X tweetId: String => ‘id_str’
+
+
+this.Schemas.TweetSchema = new SimpleSchema({
+    tweetId: {
+        type: String,
+        min: 18,
+        max: 20
+    },
+    tweetGif: {
+        type: String,
+    },
+    tweetContent: {
+        type: String,
+        max: 160
+    },
+    tweetAuthor: {
+        type: String,
+        defaultValue: 'Anon'
+    },
+    tweetDate: {
+        type: Date
+    },
+
+});
+
 this.Schemas.Items = new SimpleSchema({
+    dateCreated: {
+        type: Date,
+    },
+    tweet: {
+        type: this.Schemas.TweetSchema
+    }
 });
 
-
-AddressSchema = new SimpleSchema({
-  street: {
-    type: String,
-    max: 100
-  },
-  city: {
-    type: String,
-    max: 50
-  },
-  state: {
-    type: String,
-    regEx: /^A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]$/
-  },
-  zip: {
-    type: String,
-    regEx: /^[0-9]{5}$/
-  }
-});
-
-CustomerSchema = new SimpleSchema({
-  billingAddress: {
-    type: AddressSchema
-  },
-  shippingAddresses: {
-    type: [AddressSchema],
-    minCount: 1
-  }
-});
 
 this.Items.attachSchema(this.Schemas.Items);
+
+

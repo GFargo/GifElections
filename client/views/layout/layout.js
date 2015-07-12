@@ -1,6 +1,6 @@
 Template.layout.rendered = function() {
 	// scroll to anchor
-	$('body').on('click', 'a', function(e) { 
+	$('body').on('click', 'a', function(e) {
 		var href = $(this).attr("href");
 		if(!href) {
 			return;
@@ -21,12 +21,12 @@ Template.layout.rendered = function() {
 				$('html,body').scrollTop(0);
 			}
 		}
-	}); 
+	});
 	/*TEMPLATE_RENDERED_CODE*/
 };
 
 
-Template.FreeLayoutMainMenu.rendered = function() {
+Template.PublicLayoutMainMenu.rendered = function() {
 	$(".menu-item-collapse .dropdown-toggle").each(function() {
 		if($(this).find("li.active")) {
 			$(this).removeClass("collapsed");
@@ -38,15 +38,15 @@ Template.FreeLayoutMainMenu.rendered = function() {
 		});
 	});
 
-	
+
 };
 
-Template.FreeLayoutMainMenu.events({
-	
+Template.PublicLayoutMainMenu.events({
+
 });
 
-Template.FreeLayoutMainMenu.helpers({
-	
+Template.PublicLayoutMainMenu.helpers({
+
 });
 
 

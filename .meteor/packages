@@ -13,7 +13,6 @@ iron:router
 natestrauser:font-awesome
 matb33:collection-hooks
 copleykj:livestamp
-react
 aldeed:collection2
 momentjs:moment
 ian:accounts-ui-bootstrap-3
@@ -24,3 +23,4 @@ meteorhacks:npm
 
 
 npm-container
+grigio:babel

@@ -9,28 +9,20 @@ Meteor.startup(function() {
 	var TwitterConf = JSON.parse(Assets.getText('twitter.json'));
 
 	console.log(TwitterConf);
+	console.log(this);
 
-	var Twit = Meteor.npmRequire('twit');
+	Meteor.call('importCandidates', TwitterConf);
 
-	   var Twitter = new Twit({
-	       consumer_key: TwitterConf.consumer.key,
-		    consumer_secret: TwitterConf.consumer.secret,
-		    access_token: TwitterConf.access_token.key,
-		    access_token_secret: TwitterConf.access_token.secret
-	   });
+	Twit = Meteor.npmRequire('twit');
 
-	   //  search twitter for all tweets containing the word 'banana'
-	   //  since Nov. 11, 2011
-	   Twitter.get('search/tweets',
-	       {
-	           q: 'banana since:2011-11-11',
-	           count: 100
-	       },
-	       function(err, data, response) {
-	           console.log(data);
-	       }
-	   );
+	TwitterApi = new Twit({
+		consumer_key: TwitterConf.consumer.key,
+		consumer_secret: TwitterConf.consumer.secret,
+		access_token: TwitterConf.access_token.key,
+		access_token_secret: TwitterConf.access_token.secret
+	});
 
+	Meteor.call('getTweets', tweetQuery);
 
 
 });
@@ -40,5 +32,30 @@ Meteor.methods({
 		this.unblock();
 
 		Email.send(options);
+	},
+
+
+	"importCandidates": function(twitterConf) {
+		const {config} = this.twitterConf
+
+
+	},
+
+
+	"getTweets": function(query) {
+		const {queryString} = this.query;
+
+		TwitterApi.get('search/tweets',
+		{
+			q: 'banana since:2011-11-11',
+			count: 100
+		},
+		function(err, data, response) {
+			console.log(data);
+
+			return data;
+		}
+		);
+
 	}
 });

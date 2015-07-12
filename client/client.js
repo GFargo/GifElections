@@ -1,3 +1,4 @@
+Meteor.subscribe("Candidates");
 Meteor.subscribe("Items");
 
 this.App = {};
