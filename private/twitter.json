@@ -1,0 +1,42 @@
+{
+    "consumer": {
+        "key": "tu5Q1C5NqeiHCuS9rjAnct6vq",
+        "secret": "vhIW1puZrpouGvaMgooCFzIL9dsxFaN7mQiC0qMCPI4OmqCnnn"
+    },
+    "access_token": {
+        "key": "80031485-z8o2h7h0ScQRvSw6GLZBRUQOgIA4t5pTcZcyuE9Cn",
+        "secret": "E2X85q6z8HgyErDzHlIESWYR0XYWzlHFeVbZDhv7ilzJy"
+    },
+    "feeds": [
+        {
+            "name": "Bernie Sanders",
+            "handle": "BernieSanders",
+            "hashtags": [
+                "#GoBernie",
+                "#NotTheBillionaires",
+                "#TestHash"
+            ]
+        },
+        {
+            "name": "Hillary Clinton",
+            "handle": "HillaryClinton",
+            "hashtags": [
+                "#action1D",
+                "#HillaryInNH",
+                "#HillaryForPresident"
+            ]
+        },
+        {
+            "name": "Donald Trump",
+            "handle": "realDonaldTrump",
+            "hashtags": [
+                "#LetsMakeAmericaGreatAgain",
+                "#Trump2016"
+            ]
+        },
+        {
+            "name": "Rick Santorum",
+            "handle": "RickSantorum"
+        }
+    ]
+}
