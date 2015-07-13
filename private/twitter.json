@@ -12,26 +12,26 @@
             "name": "Bernie Sanders",
             "handle": "BernieSanders",
             "hashtags": [
-                "#GoBernie",
-                "#NotTheBillionaires",
-                "#TestHash"
+                { "tag": "#GoBernie" },
+                { "tag": "#NotTheBillionaires" },
+                { "tag": "#TestHash" }
             ]
         },
         {
             "name": "Hillary Clinton",
             "handle": "HillaryClinton",
             "hashtags": [
-                "#action1D",
-                "#HillaryInNH",
-                "#HillaryForPresident"
+                { "tag": "#action1D" },
+                { "tag": "#HillaryInNH" },
+                { "tag": "#HillaryForPresident" }
             ]
         },
         {
             "name": "Donald Trump",
             "handle": "realDonaldTrump",
             "hashtags": [
-                "#LetsMakeAmericaGreatAgain",
-                "#Trump2016"
+                { "tag": "#LetsMakeAmericaGreatAgain" },
+                { "tag": "#Trump2016" }
             ]
         },
         {

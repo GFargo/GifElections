@@ -8,10 +8,12 @@ Meteor.startup(function() {
 
 	var TwitterConf = JSON.parse(Assets.getText('twitter.json'));
 
-	console.log(TwitterConf);
-	console.log(this);
+	// console.log(TwitterConf);
+	// console.log(this);
 
-	Meteor.call('importCandidates', TwitterConf);
+	// Import Feeds into Mongo from Twitter Config File
+	Meteor.call('importFeeds', TwitterConf);
+
 
 	Twit = Meteor.npmRequire('twit');
 
@@ -22,7 +24,7 @@ Meteor.startup(function() {
 		access_token_secret: TwitterConf.access_token.secret
 	});
 
-	Meteor.call('getTweets', tweetQuery);
+	// Meteor.call('getTweets', params = {query: false} );
 
 
 });
@@ -35,15 +37,37 @@ Meteor.methods({
 	},
 
 
-	"importCandidates": function(twitterConf) {
-		const {config} = this.twitterConf
+	"importFeeds": function(twitterConfig) {
+		const feedData = twitterConfig.feeds
+		for (var feed in feedData) {
+			if (feedData.hasOwnProperty(feed)) {
+				console.log(feedData[feed]);
 
+				if( Feeds.find({handle: feedData[feed].handle}) ) {
+					console.log('Dupe Found - No Insert');
+				} else {
+					// Import Feed
+					Feeds.insert(
+						{
+							name: feedData[feed].name,
+							handle: feedData[feed].handle,
+							hashtags: feedData[feed].hashtags,
+						},
+						function (error, result) {
+							if (error) { throw error }
+							console.log(result);
+						}
+					);
+				}
+
+			}
+		}
 
 	},
 
 
-	"getTweets": function(query) {
-		const {queryString} = this.query;
+	"getTweets": function(params) {
+		const queryString = params.query
 
 		TwitterApi.get('search/tweets',
 		{

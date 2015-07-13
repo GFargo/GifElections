@@ -41,7 +41,8 @@ this.Schemas.TweetSchema = new SimpleSchema({
     },
     tweetAuthor: {
         type: String,
-        defaultValue: 'Anon'
+        defaultValue: 'anon',
+        optional: true
     },
     tweetDate: {
         type: Date
