@@ -1,5 +1,5 @@
-Meteor.subscribe("Feeds");
-Meteor.subscribe("Items");
+Meteor.subscribe("feeds");
+Meteor.subscribe("items");
 
 this.App = {};
 this.Helpers = {};

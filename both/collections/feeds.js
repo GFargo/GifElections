@@ -21,6 +21,10 @@ this.Schemas.Feeds = new SimpleSchema({
     "handle": {
         type: String
     },
+    "bias": {
+        type: String,
+        optional: true
+    },
     "hashtags.$.tag": {
         type: String,
         optional: true
@@ -33,7 +37,7 @@ this.Feeds.attachSchema(this.Schemas.Feeds);
 
 
 ////////////////////////////////
-///// HELPERS
+///// COLLECTION HELPERS
 ////////////////////////////////
 this.Feeds.helpers({
 

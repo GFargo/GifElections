@@ -1,0 +1,62 @@
+// **** FLEX ****
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    &.flex-row {
+        -webkit-flex-direction: row;
+        flex-direction: row;
+    }
+    &.flex-wrap {
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    &.flex-center {
+        // -webkit-align-items: center;
+        // align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+    &.flex-stretch {
+        -webkit-align-items: stretch;
+        align-items: stretch;
+        -webkit-justify-content: stretch;
+        justify-content: stretch;
+    }
+}
+.flex-item {
+    flex: 1 1 300px;
+
+    &.flex-big { flex: 3 2 600px; }
+    &.flex-stretch {
+        -webkit-align-content: stretch;
+        align-content: stretch;
+    }
+    &.flex-center {
+        -webkit-align-content: center;
+        align-content: center;
+    }
+}
+
+// **** CROPS ****
+.crop-container {
+
+}
+.crop-circle {
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+
+
+// **** LOADING ****
+
+.loading {
+    display: relative;
+    vertical-align: middle;
+    padding: 50px 0; // to avoid seeing it top when loading main pages
+    text-align: center;
+    i {
+        color: @gray-lighter;
+    }
+}

@@ -30,39 +30,33 @@ Meteor.startup(function() {
 });
 
 Meteor.methods({
+
 	"sendMail": function(options) {
 		this.unblock();
 
 		Email.send(options);
 	},
 
-
 	"importFeeds": function(twitterConfig) {
 		const feedData = twitterConfig.feeds
 		for (var feed in feedData) {
 			if (feedData.hasOwnProperty(feed)) {
-				console.log(feedData[feed]);
-
-				if( Feeds.find({handle: feedData[feed].handle}) ) {
-					console.log('Dupe Found - No Insert');
-				} else {
-					// Import Feed
-					Feeds.insert(
-						{
+				Feeds.upsert(
+					{ handle: feedData[feed].handle },
+					{
+						$set: {
 							name: feedData[feed].name,
 							handle: feedData[feed].handle,
-							hashtags: feedData[feed].hashtags,
-						},
-						function (error, result) {
-							if (error) { throw error }
-							console.log(result);
+							hashtags: feedData[feed].hashtags
 						}
-					);
-				}
-
+					},
+					function (error, result) {
+						if (error) { throw error }
+						console.log(result);
+					}
+				);
 			}
 		}
-
 	},
 
 
