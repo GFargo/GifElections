@@ -1,0 +1,20 @@
+<template name="MainMenu">
+    <ul id="menu-items" class="nav nav-pills nav-stacked text-center">
+        <li id="menu-item-simple" class="close-nav">
+            <a href="">
+                <span class="fa fa-close"></span>
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'home'}}">
+            <a href="{{pathFor 'home'}}">
+                <span class="fa fa-home"></span>
+            </a>
+        </li>
+        <li id="menu-item-simple" class="{{menuItemClass 'about'}}">
+            <a href="{{pathFor 'about'}}">
+                <span class="fa fa-question"></span>
+            </a>
+        </li>
+    </ul>
+</template>
+

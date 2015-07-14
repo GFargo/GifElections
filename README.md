@@ -5,6 +5,7 @@ An exercise with Meteor.js to display Gifs contained within tweets directed to t
 ##### TODO:
 
 - [x] Import feeds from twitter config file
+- [x] Create view to display current feeds
 - [ ] Display tweets from current candidates
 - [ ] Create a tweet parser function
 - [ ] Create a tweet storing function

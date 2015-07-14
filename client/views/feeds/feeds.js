@@ -1,5 +1,6 @@
+/////////////////////////////////
 // Feeds
-
+/////////////////////////////////
 Template.Feeds.rendered = function() {
 
 };
@@ -20,18 +21,19 @@ Template.Feeds.helpers({
 });
 
 
-// Single Feed
 
-Template.SingleFeed.rendered = function() {
-    const hashtags = this.data.hashtags;
-    console.log(hashtags);
+/////////////////////////////////
+// Single Feed
+/////////////////////////////////
+Template.FeedCard.rendered = function() {
+
 };
 
-Template.SingleFeed.events({
+Template.FeedCard.events({
 
 });
 
-Template.SingleFeed.helpers({
+Template.FeedCard.helpers({
     hashtags: function () {
         return this.hashtags;
     }

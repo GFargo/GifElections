@@ -1,3 +1,6 @@
+/////////////////////////////////
+// Global Layout
+/////////////////////////////////
 Template.layout.rendered = function() {
 	// scroll to anchor
 	$('body').on('click', 'a', function(e) {
@@ -26,27 +29,17 @@ Template.layout.rendered = function() {
 };
 
 
-Template.PublicLayoutMainMenu.rendered = function() {
-	$(".menu-item-collapse .dropdown-toggle").each(function() {
-		if($(this).find("li.active")) {
-			$(this).removeClass("collapsed");
-		}
-		$(this).parent().find(".collapse").each(function() {
-			if($(this).find("li.active").length) {
-				$(this).addClass("in");
-			}
-		});
-	});
 
 
-};
-
-Template.PublicLayoutMainMenu.events({
-
+/////////////////////////////////
+// PublicLayout
+/////////////////////////////////
+Template.PublicLayout.events({
+	'click .slideToggle': function() {
+		var clickedElement = event.target;
+		// add/remove CSS classes to clicked element
+	}
 });
 
-Template.PublicLayoutMainMenu.helpers({
-
-});
 
 

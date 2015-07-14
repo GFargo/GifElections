@@ -7,9 +7,8 @@ Meteor.startup(function() {
 	}
 
 	var TwitterConf = JSON.parse(Assets.getText('twitter.json'));
-
 	// console.log(TwitterConf);
-	// console.log(this);
+
 
 	// Import Feeds into Mongo from Twitter Config File
 	Meteor.call('importFeeds', TwitterConf);
@@ -17,6 +16,9 @@ Meteor.startup(function() {
 
 	Twit = Meteor.npmRequire('twit');
 
+
+
+	// Intialize through User Context
 	TwitterApi = new Twit({
 		consumer_key: TwitterConf.consumer.key,
 		consumer_secret: TwitterConf.consumer.secret,
@@ -24,10 +26,15 @@ Meteor.startup(function() {
 		access_token_secret: TwitterConf.access_token.secret
 	});
 
-	// Meteor.call('getTweets', params = {query: false} );
-
+	// Intialize through Application Context
+	// TwitterApi = new Twit({
+	// 	consumer_key: TwitterConf.consumer.key,
+	// 	consumer_secret: TwitterConf.consumer.secret,
+	// 	app_only_auth: true
+	// });
 
 });
+
 
 Meteor.methods({
 
@@ -37,7 +44,7 @@ Meteor.methods({
 		Email.send(options);
 	},
 
-	"importFeeds": function(twitterConfig) {
+	importFeeds: function(twitterConfig) {
 		const feedData = twitterConfig.feeds
 		for (var feed in feedData) {
 			if (feedData.hasOwnProperty(feed)) {
@@ -59,21 +66,48 @@ Meteor.methods({
 		}
 	},
 
+	getUserInfo: function(params) {
+		const handle = params.handle
 
-	"getTweets": function(params) {
-		const queryString = params.query
+		if (handle) {
+			console.log('<< User Info Handle:', new Date(), handle)
 
-		TwitterApi.get('search/tweets',
-		{
-			q: 'banana since:2011-11-11',
-			count: 100
-		},
-		function(err, data, response) {
-			console.log(data);
+			TwitterApi.get('users/show',
+				{
+					screen_name: handle,
+					include_entities: false,
+				},
+				function(err, data, response) {
+					console.log('getUserInfo:', data);
 
-			return data;
+					return data;
+				}
+			);
+		} else{
+			console.log('No Handle Provided');
 		}
-		);
+	},
+
+	getTweetsByHandle: function(params) {
+		const handle = params.handle
+
+		if (handle) {
+			console.log('<< Query Tweets Handle:', handle)
+
+			TwitterApi.get('statuses/user_timeline',
+				{
+					screen_name: handle,
+					count: 1
+				},
+				function(err, data, response) {
+					console.log('getTweetsByHandle:', data);
+
+					return data;
+				}
+			);
+		} else{
+			console.log('No Handle Provided');
+		}
 
 	}
 });
