@@ -1,5 +1,30 @@
 <template name="FeedList">
-    <div class="feed-header">
-        <h3>@{{handle}}</h3>
+    <div class="feed-header text-center">
+        <div class="crop-circle crop-block">
+            <img src="http://placehold.it/250x250" alt="">
+        </div>
+        <h1 class="feed-name">{{name}} <small class="feed-handle">@{{handle}}</small></h1>
+        <h4 class="feed-affiliation">{{feedAffiliation}}</h4>
+        <p class="lead">{{feedDescription}}</p>
+    </div>
+    <div class="item-list">
+        {{#each item}}
+            {{> FeedItem}}
+        {{else}}
+            <h4 class="label-danger label">Apologies, No Items Found</h4>
+        {{/each}}
+    </div>
+</template>
+
+<template name="FeedItem">
+    <div class="item-container">
+        <div class="item-picture crop-circle">
+            <!-- <img src="{{itemImage}}" alt="Feed Portrait" class="img-responsive"> -->
+            <img src="http://placehold.it/350x350" alt="Feed Portrait" class="img-responsive">
+        </div>
+        <div class="item-details">
+            <p class="item-text">{{itemText}}</p>
+            <small class="item-author">{{itemAuthor}}</small>
+        </div>
     </div>
 </template>

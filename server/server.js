@@ -19,6 +19,7 @@ Meteor.startup(function() {
 
 
 	// Intialize through User Context
+
 	TwitterApi = new Twit({
 		consumer_key: TwitterConf.consumer.key,
 		consumer_secret: TwitterConf.consumer.secret,
@@ -38,23 +39,32 @@ Meteor.startup(function() {
 
 Meteor.methods({
 
-	"sendMail": function(options) {
+	"sendMail": function (options) {
 		this.unblock();
 
 		Email.send(options);
 	},
 
-	importFeeds: function(twitterConfig) {
+
+	/////////////////////////////////
+	// Startup Functions
+	/////////////////////////////////
+	importFeeds: function (twitterConfig) {
 		const feedData = twitterConfig.feeds
 		for (var feed in feedData) {
 			if (feedData.hasOwnProperty(feed)) {
 				Feeds.upsert(
 					{ handle: feedData[feed].handle },
-					{
-						$set: {
+					{ $set: {
 							name: feedData[feed].name,
 							handle: feedData[feed].handle,
-							hashtags: feedData[feed].hashtags
+							hashtags: feedData[feed].hashtags,
+							feedInfo: {
+								latestId: feedData[feed].feedInfo.latestId,
+								affiliation: feedData[feed].feedInfo.affiliation,
+								portrait: feedData[feed].feedInfo.portrait,
+								description: feedData[feed].feedInfo.description
+							},
 						}
 					},
 					function (error, result) {
@@ -66,7 +76,13 @@ Meteor.methods({
 		}
 	},
 
-	getUserInfo: function(params) {
+
+
+
+	/////////////////////////////////
+	// Twitter API Calls
+	/////////////////////////////////
+	getUserInfo: function (params) {
 		const handle = params.handle
 
 		if (handle) {
@@ -88,8 +104,11 @@ Meteor.methods({
 		}
 	},
 
-	getTweetsByHandle: function(params) {
-		const handle = params.handle
+	getTweetsByHandle: function (params, queryLimit) {
+		const 	handle = params.handle,
+				date = params.date,
+				limit = queryLimit
+
 
 		if (handle) {
 			console.log('<< Query Tweets Handle:', handle)
@@ -97,7 +116,7 @@ Meteor.methods({
 			TwitterApi.get('statuses/user_timeline',
 				{
 					screen_name: handle,
-					count: 1
+					count: limit
 				},
 				function(err, data, response) {
 					console.log('getTweetsByHandle:', data);
@@ -108,6 +127,27 @@ Meteor.methods({
 		} else{
 			console.log('No Handle Provided');
 		}
+
+	},
+
+
+	/////////////////////////////////
+	// Query Parsing
+	/////////////////////////////////
+
+	parseTwitterData: function (data) {
+		const response = data
+
+		var testData = JSON.parse(Assets.getText('testTweet.json'));
+
+		console.log("Test Data:", testData);
+		/*
+			loop thought item in dataset
+				- test if tweet text has URL >> check URL if resolves to .gif/.jpg file format
+				- test if tweet has emoji >> set category
+				-
+
+		*/
 
 	}
 });

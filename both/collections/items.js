@@ -26,11 +26,13 @@ this.Schemas = this.Schemas || {};
 //     X tweetId: String => ‘id_str’
 
 
+////////////////////////////////
+///// SimpleSchema
+////////////////////////////////
+
 this.Schemas.TweetSchema = new SimpleSchema({
     tweetId: {
         type: String,
-        min: 18,
-        max: 20
     },
     tweetGif: {
         type: String,
@@ -47,12 +49,14 @@ this.Schemas.TweetSchema = new SimpleSchema({
     tweetDate: {
         type: Date
     },
-
 });
 
 this.Schemas.Items = new SimpleSchema({
-    dateCreated: {
-        type: Date,
+    feed: {
+        type: String
+    },
+    tweetType: {
+        type: String
     },
     tweet: {
         type: this.Schemas.TweetSchema
@@ -63,3 +67,17 @@ this.Schemas.Items = new SimpleSchema({
 this.Items.attachSchema(this.Schemas.Items);
 
 
+
+
+
+////////////////////////////////
+///// COLLECTION HELPERS
+////////////////////////////////
+this.Items.helpers({
+    getLatestTweet: function(feedHandle) {
+        const handle = feedHandle
+
+        return Items.find({feed: handle},  {sort: { _id: -1 }}).limit(1);
+    }
+
+});

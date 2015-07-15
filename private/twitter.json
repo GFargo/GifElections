@@ -15,7 +15,13 @@
                 { "tag": "GoBernie" },
                 { "tag": "NotTheBillionaires" },
                 { "tag": "TestHash" }
-            ]
+            ],
+            "feedInfo": {
+                "latestId": "init",
+                "affiliation": "democrats",
+                "portrait": "",
+                "description": ""
+            }
         },
         {
             "name": "Hillary Clinton",
@@ -24,7 +30,13 @@
                 { "tag": "action1D" },
                 { "tag": "HillaryInNH" },
                 { "tag": "HillaryForPresident" }
-            ]
+            ],
+            "feedInfo": {
+                "latestId": "init",
+                "affiliation": "democrats",
+                "portrait": "",
+                "description": ""
+            }
         },
         {
             "name": "Donald Trump",
@@ -32,11 +44,33 @@
             "hashtags": [
                 { "tag": "LetsMakeAmericaGreatAgain" },
                 { "tag": "Trump2016" }
-            ]
+            ],
+            "feedInfo": {
+                "latestId": "init",
+                "affiliation": "republicans",
+                "portrait": "",
+                "description": ""
+            }
         },
         {
             "name": "Rick Santorum",
-            "handle": "RickSantorum"
+            "handle": "RickSantorum",
+            "feedInfo": {
+                "latestId": "init",
+                "affiliation": "republicans",
+                "portrait": "",
+                "description": ""
+            }
+        },
+        {
+            "name": "Huffington Post",
+            "handle": "huffingtonpost",
+            "feedInfo": {
+                "latestId": "init",
+                "affiliation": "news",
+                "portrait": "",
+                "description": ""
+            }
         }
     ]
 }

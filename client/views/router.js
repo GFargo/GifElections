@@ -30,7 +30,6 @@ Router.onBeforeAction(function() {
 // Router Map
 /////////////////////////////////
 Router.map(function () {
-
 	this.route("home", {path: "/", controller: "HomeController"});
 	this.route("about", {path: "/about", controller: "AboutController"});
 });

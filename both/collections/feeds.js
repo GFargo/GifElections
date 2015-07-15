@@ -12,8 +12,34 @@ this.Feeds.userCanRemove = function(userId, doc) {
 	return true;
 }
 
+
+
+////////////////////////////////
+///// SimpleSchema
+////////////////////////////////
+
 this.Schemas = this.Schemas || {};
 
+// Feed Info Schema
+this.Schemas.FeedInfoSchema = new SimpleSchema({
+    latestId: {
+        type: String,
+    },
+    "affiliation": {
+        type: String,
+        optional: true
+    },
+    "portrait": {
+        type: String,
+        optional: true
+    },
+    "description": {
+        type: String,
+        optional: true
+    },
+});
+
+// Feed Schema
 this.Schemas.Feeds = new SimpleSchema({
     "name": {
         type: String
@@ -21,15 +47,15 @@ this.Schemas.Feeds = new SimpleSchema({
     "handle": {
         type: String
     },
-    "bias": {
-        type: String,
-        optional: true
-    },
     "hashtags.$.tag": {
         type: String,
         optional: true
     },
+    "feedInfo": {
+        type: this.Schemas.FeedInfoSchema
+    }
 });
+
 
 this.Feeds.attachSchema(this.Schemas.Feeds);
 
