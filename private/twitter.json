@@ -14,7 +14,7 @@
             "hashtags": [
                 { "tag": "GoBernie" },
                 { "tag": "NotTheBillionaires" },
-                { "tag": "TestHash" }
+                { "tag": "FeelTheBern" }
             ],
             "feedInfo": {
                 "latestId": "init",
@@ -65,6 +65,16 @@
         {
             "name": "Huffington Post",
             "handle": "huffingtonpost",
+            "feedInfo": {
+                "latestId": "init",
+                "affiliation": "news",
+                "portrait": "",
+                "description": ""
+            }
+        },
+        {
+            "name": "G Fargo - Test",
+            "handle": "GhFargo",
             "feedInfo": {
                 "latestId": "init",
                 "affiliation": "news",

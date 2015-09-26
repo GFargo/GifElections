@@ -7,6 +7,8 @@ Package.describe({
   name: 'npm-container'
 });
 
+// api.addAssets('../../packages.json', 'client');
+
 var packagesJsonFile = path.resolve('./packages.json');
 try {
   var fileContent = fs.readFileSync(packagesJsonFile);
@@ -19,5 +21,5 @@ try {
 // Adding the app's packages.json as a used file for this package will get
 // Meteor to watch it and reload this package when it changes
 Package.onUse(function(api) {
-  api.add_files(['index.js', '../../packages.json'], 'server');
+  api.add_files(['index.js'], 'server');
 });
