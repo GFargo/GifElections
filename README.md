@@ -2,6 +2,11 @@
 
 An exercise with Meteor.js to display Gifs contained within tweets directed to the 2016 presidential candidates.
 
+##### Twitter General Reqs
+
+![Visual Display Requirements](https://i.imgur.com/Zb000N8.png)
+[URL](https://about.twitter.com/company/display-requirements)
+
 
 ### Current Routes
 
@@ -9,6 +14,13 @@ An exercise with Meteor.js to display Gifs contained within tweets directed to t
 - `/about`  >> About Page
 - `/feed/:handle` >> Displays Tweets from :handle
 - `/tag/:hashtag` >> Displays Tweets from :hashtag
+
+### Twitter API Streaming
+
+- [Streaming Overview](https://dev.twitter.com/streaming/overview)
+- [Using Streams](https://dev.twitter.com/streaming/userstreams)
+- [Public Streams](https://dev.twitter.com/streaming/public)
+
 
 
 ### Requirements for Site Streaming
@@ -25,13 +37,13 @@ An exercise with Meteor.js to display Gifs contained within tweets directed to t
 - [x] Import feeds from twitter config file
 - [x] Create view to display current feeds
 - [ ] Write Twitter API Getters 
-- [ ]( Not sure if this should be timed requests or something else? )
+    - [ ] _Not sure if this should be timed requests or something else?_
     - [x] Get User Info
     - [x] Get Tweets for Handle
     - [ ] Get Tweets for Hashtag
 - [ ] Display tweets from current candidates
-- [ ] Create a tweet parser function
-- [ ] Create a tweet storing function
+- [ ] Create a tweet parser function ?
+- [ ] Create a tweet storing function -
 
 
 

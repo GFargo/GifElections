@@ -25,7 +25,7 @@ var TwitterConf = JSON.parse(Assets.getText('twitter.json'));
 
 
 // Import Feeds into Mongo from Twitter Config File
-Meteor.call('importFeeds', TwitterConf);
+Meteor.call('importFeeds', TwitterConf.feeds);
 
 
 // Intialize through User Context
@@ -38,4 +38,21 @@ TwitterApi = new Twit({
 
 
 // Grab First Feed & Create Stream
-Meteor.call('createStream', TwitterConf.feeds[1`].handle, 'user');
+// Meteor.call('createStream', TwitterConf.feeds[1].handle, 'user');
+
+checkTweetForMedia = function (tweet = 'undefined') {
+        //tweet.extended_entities.media[0]
+        if (typeof tweet == 'undefined') {
+            console.log("No tweet to parse");
+            return false;
+        }
+        const t = tweet;
+
+        if (typeof tweet.extended_entities !== 'undefined') {
+            if (typeof tweet.extended_entities.media[0].video_info !== 'undefined')
+                return true;
+        } else {
+            return false;
+        }
+
+    }

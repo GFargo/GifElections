@@ -7,7 +7,7 @@ Template.FeedList.rendered = function() {
     // Meteor.call('parseTwitterData');
     // Meteor.call('createStream', this.data);
     // Meteor.call('getUserInfo', this.data);
-    // Meteor.call('getTweetsByHandle', this.data, 1);
+    Meteor.call('getTweetsByHandle', this.data, 200);
 };
 
 Template.FeedList.events({

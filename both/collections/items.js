@@ -30,27 +30,68 @@ this.Schemas = this.Schemas || {};
 ///// SimpleSchema
 ////////////////////////////////
 
+// MEDIA
+this.Schemas.MediaSchema = new SimpleSchema({
+    content_type: {
+        type: String,
+        defaultValue: 'video/mp4'
+    },
+    url: {
+        type: String,
+    },
+    file_ext: {
+        type: String,
+        defaultValue: 'mp4'
+    },
+    aspect_ratio: {
+        type: [Object],
+        minCount: 1,
+        maxCount: 2
+    },
+});
+
+// META
+this.Schemas.MetaSchema = new SimpleSchema({
+    retweet_count: {
+        type: String,
+        defaultValue: 'video/mp4'
+    },
+    favorite_count: {
+        type: String,
+    },
+    possibly_sensitive: {
+        type: Boolean,
+        defaultValue: false
+    },
+});
+
+
+// TWEET
 this.Schemas.TweetSchema = new SimpleSchema({
-    tweetId: {
+    id: {
         type: String,
     },
-    tweetGif: {
-        type: String,
+    media: {
+        type: this.Schemas.MediaSchema,
     },
-    tweetContent: {
+    text: {
         type: String,
         max: 160
     },
-    tweetAuthor: {
+    author: {
         type: String,
         defaultValue: 'anon',
         optional: true
     },
-    tweetDate: {
+    meta: {
+        type: this.Schemas.MetaSchema,
+    },
+    date: {
         type: Date
     },
 });
 
+// ITEM _ ROOT SCHEMA
 this.Schemas.Items = new SimpleSchema({
     feed: {
         type: String

@@ -17,10 +17,16 @@
                 { "tag": "FeelTheBern" }
             ],
             "feedInfo": {
-                "latestId": "init",
+                "max_id": "",
+                "since_id": "",
                 "affiliation": "democrats",
-                "portrait": "",
-                "description": ""
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
+                "description": "",
+                "website": ""
             }
         },
         {
@@ -32,9 +38,14 @@
                 { "tag": "HillaryForPresident" }
             ],
             "feedInfo": {
-                "latestId": "init",
+                "max_id": "",
+                "since_id": "",
                 "affiliation": "democrats",
-                "portrait": "",
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
                 "description": ""
             }
         },
@@ -46,9 +57,14 @@
                 { "tag": "Trump2016" }
             ],
             "feedInfo": {
-                "latestId": "init",
+                "max_id": "",
+                "since_id": "",
                 "affiliation": "republicans",
-                "portrait": "",
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
                 "description": ""
             }
         },
@@ -56,9 +72,14 @@
             "name": "Rick Santorum",
             "handle": "RickSantorum",
             "feedInfo": {
-                "latestId": "init",
+                "max_id": "",
+                "since_id": "",
                 "affiliation": "republicans",
-                "portrait": "",
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
                 "description": ""
             }
         },
@@ -66,9 +87,14 @@
             "name": "Huffington Post",
             "handle": "huffingtonpost",
             "feedInfo": {
-                "latestId": "init",
+                "max_id": "",
+                "since_id": "",
                 "affiliation": "news",
-                "portrait": "",
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
                 "description": ""
             }
         },
@@ -76,9 +102,14 @@
             "name": "G Fargo - Test",
             "handle": "GhFargo",
             "feedInfo": {
-                "latestId": "init",
+                "max_id": "",
+                "since_id": "",
                 "affiliation": "news",
-                "portrait": "",
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
                 "description": ""
             }
         }

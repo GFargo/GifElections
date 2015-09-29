@@ -69,7 +69,7 @@
         "lang": "en"
     },
     {
-           "created_at": "Tue Jul 14 19:32:03 +0000 2015",
+        "created_at": "Tue Jul 14 19:32:03 +0000 2015",
         "id": 621039474869284864,
         "id_str": "621039474869284864",
         "text": "The fact is that the middle class of this country continues its 40-year decline, people are working longer hours for lower wages.",
@@ -136,5 +136,5 @@
         "favorited": false,
         "retweeted": false,
         "lang": "en"
-    }
+    },
 ]

@@ -20,20 +20,43 @@ this.Feeds.userCanRemove = function(userId, doc) {
 
 this.Schemas = this.Schemas || {};
 
+// Portrait Schema
+this.Schemas.PortraitSchema = new SimpleSchema({
+    url: {
+        type: String,
+        optional: true
+    },
+    size: {
+        type: String,
+        optional: true
+    },
+    caption: {
+        type: String,
+        optional: true
+    }
+});
+
 // Feed Info Schema
 this.Schemas.FeedInfoSchema = new SimpleSchema({
-    latestId: {
+    since_id: {
         type: String,
+        optional: true,
+        defaultValue: -1
     },
-    "affiliation": {
+    max_id: {
+        type: String,
+        optional: true,
+        defaultValue: -1
+    },
+    affiliation: {
         type: String,
         optional: true
     },
-    "portrait": {
-        type: String,
+    portrait: {
+        type: this.Schemas.PortraitSchema,
         optional: true
     },
-    "description": {
+    description: {
         type: String,
         optional: true
     },
