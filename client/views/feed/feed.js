@@ -2,7 +2,7 @@
 // FeedList
 /////////////////////////////////
 Template.FeedList.rendered = function() {
-    console.log('FeedList Rendered', this);
+    console.log('FeedList Rendered:', this);
 
     // Meteor.call('parseTwitterData');
     // Meteor.call('createStream', this.data);
@@ -34,7 +34,7 @@ Template.FeedItem.rendered = function() {
     console.log('FeedItem Rendered', this);
 
     // Meteor.call('getUserInfo', this.data);
-    // Meteor.call('getTweetsByHandle', this.data, 1);
+    // Meteor.call('getTweetsByHandle', this.data, 200);
 };
 
 Template.FeedItem.events({

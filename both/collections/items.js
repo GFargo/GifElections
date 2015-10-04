@@ -30,18 +30,55 @@ this.Schemas = this.Schemas || {};
 ///// SimpleSchema
 ////////////////////////////////
 
-// MEDIA
-this.Schemas.MediaSchema = new SimpleSchema({
-    content_type: {
-        type: String,
-        defaultValue: 'video/mp4'
-    },
-    url: {
+// User
+this.Schemas.UserSchema = new SimpleSchema({
+    handle: {
         type: String,
     },
-    file_ext: {
+    name: {
         type: String,
-        defaultValue: 'mp4'
+    },
+    website_url: {
+        type: String,
+        optional: true,
+    },
+    verified: {
+        type: String,
+    },
+    location: {
+        type: String,
+        optional: true,
+    },
+    statuses_count: {
+        type: String,
+    },
+    followers_count: {
+        type: String,
+    },
+    profile_background_color: {
+        type: String,
+    },
+    profile_link_color: {
+        type: String,
+    },
+    profile_banner_url: {
+        type: String,
+    },
+    profile_image_url: {
+        type: String,
+    },
+});
+// Media Size
+this.Schemas.MediaSizeSchema = new SimpleSchema({
+    w: {
+        type: String,
+    },
+    h: {
+        type: String,
+    },
+    resize: {
+        type: String,
+        defaultValue: 'fit',
     },
     aspect_ratio: {
         type: [Object],
@@ -49,8 +86,37 @@ this.Schemas.MediaSchema = new SimpleSchema({
         maxCount: 2
     },
 });
+// Media
+this.Schemas.MediaSchema = new SimpleSchema({
+    id: {
+        type: String,
+    },
+    source_tweet_id: {
+        type: String,
+    },
+    source_user_id: {
+        type: String,
+    },
+    url: {
+        type: String,
+    },
+    content_type: {
+        type: String,
+        defaultValue: 'video/mp4'
+    },
+    bitrate: {
+        type: String,
+        defaultValue: 'mp4'
+    },
+    duration_millis: {
+        type: String,
+    },
+    size: {
+        type: this.Schemas.MediaSizeSchema,
+    },
+});
 
-// META
+// Meta
 this.Schemas.MetaSchema = new SimpleSchema({
     retweet_count: {
         type: String,
@@ -63,6 +129,17 @@ this.Schemas.MetaSchema = new SimpleSchema({
         type: Boolean,
         defaultValue: false
     },
+    lang: {
+        type: String,
+        defaultValue: 'en'
+    },
+    timestamp_ms: {
+        type: String,
+        optional: true,
+    },
+    created_at: {
+        type: String
+    },
 });
 
 
@@ -71,23 +148,18 @@ this.Schemas.TweetSchema = new SimpleSchema({
     id: {
         type: String,
     },
-    media: {
-        type: this.Schemas.MediaSchema,
-    },
     text: {
         type: String,
         max: 160
     },
-    author: {
+    url: {
         type: String,
-        defaultValue: 'anon',
-        optional: true
+    },
+    media: {
+        type: this.Schemas.MediaSchema,
     },
     meta: {
         type: this.Schemas.MetaSchema,
-    },
-    date: {
-        type: Date
     },
 });
 
@@ -96,11 +168,21 @@ this.Schemas.Items = new SimpleSchema({
     feed: {
         type: String
     },
-    tweetType: {
+    affiliation: {
         type: String
+    },
+    type: {
+        type: String
+    },
+    user: {
+        type: this.Schemas.UserSchema,
     },
     tweet: {
         type: this.Schemas.TweetSchema
+    },
+    retweet: {
+        type: [this.Schemas.TweetSchema],
+        optional: true,
     }
 });
 

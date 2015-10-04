@@ -86,52 +86,61 @@ Meteor.methods({
 	/////////////////////////////////
 	// Twitter REST - Get Tweets by Handle
 	/////////////////////////////////
-	getTweetsByHandle: function (params, tweetLimit = 200, excludeReplies = true) {
-		// console.log('Params:', params);
+	getTweetsByHandle: function (params = 'undefined', tweetLimit = 200, excludeReplies = true) {
+		console.log('---------');
+		console.log('Params:', params);
+		console.log('---------');
 
-		const 	handle = params.handle,
-				date = params.date,
-				limit = tweetLimit,
-				since_id = typeof params.feedInfo.since_id !== 'undefined' ? params.feedInfo.since_id : undefined,
-				max_id = typeof params.feedInfo.max_id !== 'undefined' ? params.feedInfo.max_id : undefined,
-				replies = excludeReplies;``
+		if (typeof params == 'undefined' || typeof params.handle == 'undefined') {
+			return false;
+		}
 
+		const 	queryParams = new Object();
 
-		if (handle) {
+				queryParams.handle = params.handle,
+				queryParams.date = params.date,
+				queryParams.limit = tweetLimit,
+				queryParams.since_id = typeof params.feedInfo.since_id !== 'undefined' ? params.feedInfo.since_id : undefined,
+				queryParams.max_id = typeof params.feedInfo.max_id !== 'undefined' ? params.feedInfo.max_id : undefined,
+				queryParams.exclude_replies = excludeReplies;
+
+		if (typeof queryParams.handle !== 'undefined') {
 			// console.log('<< Query Tweets Handle:', handle)
 
 			TwitterApi.get('statuses/user_timeline',
 				{
-					screen_name: handle,
-					count: limit,
-					since_id: since_id,
-					max_id: max_id,
-					exclude_replies: replies
+					screen_name: queryParams.handle,
+					count: queryParams.limit,
+					since_id: queryParams.since_id,
+					max_id: queryParams.max_id,
+					exclude_replies: queryParams.exclude_replies
 				},
 				function(err, data, response) {
 					if (err) {
 						console.log(err);
 						return false;
 					}
-
-					// console.log('response:', response);
-					// console.log('getTweetsByHandle:', data);
+					// Filter Response
 					data.forEach(function(tweet, index){
 						if (checkTweetForMedia(tweet)) {
-							const 	tweet_id = tweet.id_str;
-
-
 							console.log('========== ',index,'Tweet Media Found ===============');
-							console.log('User: ', tweet.user);
+							// console.log('Tweet: ', tweet);
+							// console.log('-----------------------------------------------------');
+							console.log('Media: ', tweet.extended_entities);
 							console.log('-----------------------------------------------------');
-							console.log('Media: ', tweet.extended_entities.media[0]);
+							console.log('Media: ', tweet);
+							// console.log('Video Info: ', tweet.extended_entities.media[0].video_info);
+							// console.log('-----------------------------------------------------');
+							// console.log('Sizes: ', tweet.extended_entities.media[0].sizes);
+
+							// getMediaVariant(tweet.extended_entities.media[0].video_info.variants);
 						}
 					});
 					// return data;
 					console.log('--alldone--');
 				}
 			);
-		} else{
+		} else {
 			console.log('No Handle Provided');
 		}
 
@@ -144,7 +153,7 @@ Meteor.methods({
 	createStream: function (params = undefined, streamType = 'user') {
 	    const   feedInfo = params,
 	            type = streamType;
-	    let trackingInfo = [];
+	    let 	trackingInfo = [];
 
 	    if (typeof feedInfo == 'undefined') { return; } // TODO: Correct Error / Throw logic
 
@@ -206,7 +215,7 @@ Meteor.methods({
 	                // console.log("=======================================");
 	                // console.log("Media: ", tweet.extended_entities.media[0]);
 	                console.log("\n==================\n Gif Found | Type: ", tweet.extended_entities.media[0].type);
-	                console.log(tweet.extended_entities.media[0].video_info, );
+	                console.log(tweet);
 	                console.log("\n==================\n");
 
 	                // tweet.extended_entities.media[0].type = 'video'
@@ -263,37 +272,71 @@ Meteor.methods({
 	/////////////////////////////////
 	// Twitter - Store Tweet
 	/////////////////////////////////
-	storeTweet: function (tweet = undefined) {
+	storeTweet: function (tweet = undefined, queryParams = undefined) {
 
-		const 	userName = tweet.user.name,
-				userHandle = tweet.user.screen_name,
-				userTweet = tweet.text,
-				tweetDate = tweet.created_at,
-				profileImg = tweet.user.profile_image_url
+		// TODO: Error Handling
+		if (tweet || queryParams == undefined) { return false; }
 
-		// console.log('tweet info:', tweet);
-		console.log(userHandle + " (" + userName + ")" + " said " + userTweet + " at " + tweetDate);
-		console.log("=======================================");
+		const 	item 								= new Object();
+				item.feed 							= queryParams.feed,
+				item.affiliation					= queryParams.affiliation,
+				item.type 							= getTweetType(tweet.extended_entities.media[0].type),
 
+				// User
+				item.user.handle 					= tweet.user.screen_name,
+				item.user.name 						= tweet.user.name,
+				item.user.website_url 				= tweet.user.url,
+				item.user.followers_count 			= tweet.user.followers_count,
+				item.user.verified 					= tweet.user.verified,
+				item.user.statuses_count 			= tweet.user.statuses_count,
+				item.user.location 					= tweet.user.location,
+				item.user.profile_background_color 	= tweet.user.profile_background_color,
+				item.user.profile_link_color 		= tweet.user.profile_link_color,
+				item.user.profile_banner_url 		= tweet.user.profile_banner_url,
+				item.user.profile_image_url 		= tweet.user.profile_image_url,
 
-		if (tweet !== 'undefined') {
-			const t = tweet
+				// Tweet
+				item.tweet.id 						= tweet.id_str,
+				item.tweet.text 					= tweet.text,
+				item.tweet.url 						= tweet.extended_entities.media[0].expanded_url,
+				item.tweet.media.id 				= tweet.extended_entities.media[0].id,
+				item.tweet.media.source_tweet_id 	= tweet.extended_entities.media[0].source_status_id_str,
+				item.tweet.media.source_user_id 	= tweet.extended_entities.media[0].source_user_id_str,
+				item.tweet.media.url 				= getMediaVariant(tweet.extended_entities.media[0].video_info.variants),
+				item.tweet.media.content_type 		= tweet.extended_entities.media[0].type,
+				item.tweet.media.bitrate 			= tweet.extended_entities.media[0].bitrate,
+				item.tweet.media.duration_millis 	= tweet.extended_entities.media[0].video_info.duration_millis,
+				item.tweet.media.size.w 			= tweet.extended_entities.media[0].sizes.medium.w,
+				item.tweet.media.size.h 			= tweet.extended_entities.media[0].sizes.medium.h,
+				item.tweet.media.size.resize 		= tweet.extended_entities.media[0].sizes.medium.resize,
+				item.tweet.media.size.aspect_ratio	= tweet.extended_entities.media[0].video_info.aspect_ratio,
 
-			// // Insert Tweet into Database
-			// Items.insert({
-			// 	user: userName,
-			// 	userscreen: userHandle,
-			// 	tweet: userTweet,
-			// 	picture: profileImg,
-			// 	date: tweetDate
-			// }, function(error){
-			// 	if(error)
-			//  		console.log(error);
-			// });
+				// Meta
+				item.tweet.meta.retweet_count		= tweet.retweet_count,
+				item.tweet.meta.favorite_count		= tweet.favorite_count,
+				item.tweet.meta.possibly_sensitive	= tweet.possibly_sensitive,
+				item.tweet.meta.language			= tweet.lang,
+				item.tweet.meta.timestamp_ms		= getTweetTimestampMs(tweet.timestamp_ms),
+				item.tweet.meta.created_at			= tweet.created_at;
 
-		} else {
-
+		// Retweet Status
+		if (checkRetweetPresent(tweet.retweeted_status)) {
+			console.log('--- Found Retweet Status ---');
 		}
+
+		console.log('--- ITEM to STORE ---');
+		console.log(item);
+		console.log('---------------------');
+
+		// Insert Tweet into Database
+		// Items.insert(item, function(error){
+		// 	// Insert Callback Function
+		// 	if(error) {
+		//  		console.log(error);
+		// 	} else {
+		// 		console.log('Successful Insert');
+		// 	}
+		// });
 	},
 
 
