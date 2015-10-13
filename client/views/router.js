@@ -38,18 +38,21 @@ Router.map(function () {
 /////////////////////////////////
 // Dynamic Routes
 /////////////////////////////////
+
+// Handles
 Router.route('/feed/:handle', {
 	name: "feed",
 	template: 'FeedList',
 	data: function(){
-		console.log("Handle Query", this.params);
+		console.log("Route >> Handle >> ", this.params);
 		return Feeds.findOne({handle: this.params.handle});
 	}
 });
 
+// Hashtags
 Router.route('/tag/:hashtag', {
 	name: "TagList",
 	data: function(){
-		console.log("Hashtag Query", this.params);
+		console.log("Route >> Hashtag >> ", this.params);
 	}
 });

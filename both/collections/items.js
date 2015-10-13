@@ -78,6 +78,7 @@ this.Schemas.MediaSizeSchema = new SimpleSchema({
     },
     resize: {
         type: String,
+        optional: true,
         defaultValue: 'fit',
     },
     aspect_ratio: {
@@ -93,9 +94,11 @@ this.Schemas.MediaSchema = new SimpleSchema({
     },
     source_tweet_id: {
         type: String,
+        optional: true,
     },
     source_user_id: {
         type: String,
+        optional: true,
     },
     url: {
         type: String,
@@ -110,6 +113,7 @@ this.Schemas.MediaSchema = new SimpleSchema({
     },
     duration_millis: {
         type: String,
+        optional: true,
     },
     size: {
         type: this.Schemas.MediaSizeSchema,

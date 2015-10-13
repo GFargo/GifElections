@@ -17,8 +17,6 @@
                 { "tag": "FeelTheBern" }
             ],
             "feedInfo": {
-                "max_id": "",
-                "since_id": "",
                 "affiliation": "democrats",
                 "portrait": {
                     "url": "",
@@ -38,8 +36,6 @@
                 { "tag": "HillaryForPresident" }
             ],
             "feedInfo": {
-                "max_id": "",
-                "since_id": "",
                 "affiliation": "democrats",
                 "portrait": {
                     "url": "",
@@ -57,8 +53,6 @@
                 { "tag": "Trump2016" }
             ],
             "feedInfo": {
-                "max_id": "",
-                "since_id": "",
                 "affiliation": "republicans",
                 "portrait": {
                     "url": "",
@@ -72,8 +66,6 @@
             "name": "Rick Santorum",
             "handle": "RickSantorum",
             "feedInfo": {
-                "max_id": "",
-                "since_id": "",
                 "affiliation": "republicans",
                 "portrait": {
                     "url": "",
@@ -87,8 +79,6 @@
             "name": "Huffington Post",
             "handle": "huffingtonpost",
             "feedInfo": {
-                "max_id": "",
-                "since_id": "",
                 "affiliation": "news",
                 "portrait": {
                     "url": "",
@@ -102,8 +92,6 @@
             "name": "G Fargo - Test",
             "handle": "GhFargo",
             "feedInfo": {
-                "max_id": "",
-                "since_id": "",
                 "affiliation": "news",
                 "portrait": {
                     "url": "",

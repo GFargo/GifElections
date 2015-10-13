@@ -2,7 +2,7 @@
 // Feeds
 /////////////////////////////////
 Template.Feeds.rendered = function() {
-
+    console.log('Feeds Rendered');
 };
 
 Template.Feeds.events({
