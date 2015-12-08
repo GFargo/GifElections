@@ -20,22 +20,6 @@ this.Feeds.userCanRemove = function(userId, doc) {
 
 this.Schemas = this.Schemas || {};
 
-// Portrait Schema
-this.Schemas.PortraitSchema = new SimpleSchema({
-    url: {
-        type: String,
-        optional: true
-    },
-    size: {
-        type: String,
-        optional: true
-    },
-    caption: {
-        type: String,
-        optional: true
-    }
-});
-
 // Feed Info Schema
 this.Schemas.FeedInfoSchema = new SimpleSchema({
     since_id: {
@@ -52,11 +36,43 @@ this.Schemas.FeedInfoSchema = new SimpleSchema({
         type: String,
         optional: true
     },
-    portrait: {
-        type: this.Schemas.PortraitSchema,
+    description: {
+        type: String,
         optional: true
     },
-    description: {
+    url: {
+        type: String,
+        optional: true
+    },
+    followers_count: {
+        type: String,
+        optional: true
+    },
+    friends_count: {
+        type: String,
+        optional: true
+    },
+    statuses_count: {
+        type: String,
+        optional: true
+    },
+    profile_banner_url: {
+        type: String,
+        optional: true
+    },
+    profile_image_url: {
+        type: String,
+        optional: true
+    },
+    profile_background_color: {
+        type: String,
+        optional: true
+    },
+    profile_link_color: {
+        type: String,
+        optional: true
+    },
+    created_at: {
         type: String,
         optional: true
     },

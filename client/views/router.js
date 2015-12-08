@@ -42,10 +42,12 @@ Router.map(function () {
 // Handles
 Router.route('/feed/:handle', {
 	name: "feed",
-	template: 'FeedList',
+	template: 'SingleFeed',
 	data: function(){
 		console.log("Route >> Handle >> ", this.params);
-		return Feeds.findOne({handle: this.params.handle});
+		return {
+			handle: this.params.handle,
+		}
 	}
 });
 

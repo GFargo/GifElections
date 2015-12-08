@@ -82,15 +82,19 @@ this.Schemas.MediaSizeSchema = new SimpleSchema({
         defaultValue: 'fit',
     },
     aspect_ratio: {
-        type: [Object],
+        type: [String],
         minCount: 1,
         maxCount: 2
     },
 });
+
 // Media
 this.Schemas.MediaSchema = new SimpleSchema({
     id: {
         type: String,
+    },
+    type: {
+        type: String
     },
     source_tweet_id: {
         type: String,
@@ -100,23 +104,23 @@ this.Schemas.MediaSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    url: {
-        type: String,
-    },
-    content_type: {
-        type: String,
-        defaultValue: 'video/mp4'
-    },
-    bitrate: {
-        type: String,
-        defaultValue: 'mp4'
-    },
     duration_millis: {
         type: String,
         optional: true,
     },
     size: {
         type: this.Schemas.MediaSizeSchema,
+    },
+    "variants.$.url": {
+        type: String,
+    },
+    "variants.$.content_type": {
+        type: String,
+        defaultValue: 'video/mp4'
+    },
+    "variants.$.bitrate": {
+        type: String,
+        optional: true,
     },
 });
 
@@ -173,9 +177,6 @@ this.Schemas.Items = new SimpleSchema({
         type: String
     },
     affiliation: {
-        type: String
-    },
-    type: {
         type: String
     },
     user: {

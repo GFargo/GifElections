@@ -1,14 +1,25 @@
-<template name="FeedList">
-    <div class="feed-header text-center">
-        <div class="crop-circle crop-block">
-            <img src="http://placehold.it/250x250" alt="">
+<!-- Single Feed -->
+
+<template name="SingleFeed">
+    {{#with feed}}
+        <div class="feed-header">
+            <div class="row">
+                <div class="col-sm-2 col-md-1">
+                    <div class="crop-circle crop-block">
+                        <img src="{{enlarge_portrait feedInfo.profile_image_url}}" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-11">
+                    <h1 class="feed-name">{{name}} <small class="feed-handle">@{{handle}}</small></h1>
+                    <!-- <h4 class="feed-affiliation">{{feedInfo.affiliation}}</h4> -->
+                    <p class="lead">{{feedInfo.description}}</p>
+                </div>
+            </div>
         </div>
-        <h1 class="feed-name">{{name}} <small class="feed-handle">@{{handle}}</small></h1>
-        <h4 class="feed-affiliation">{{feedAffiliation}}</h4>
-        <p class="lead">{{feedDescription}}</p>
-    </div>
-    <div class="item-list">
-        {{#each item}}
+    {{/with}}
+
+    <div class="tweet-list">
+        {{#each items}}
             {{> FeedItem}}
         {{else}}
             <!-- {{> spinner}} -->
@@ -17,15 +28,63 @@
     </div>
 </template>
 
+
+
+
+
+
+
+<!-- Indivdual Tweet -->
 <template name="FeedItem">
-    <div class="item-container">
-        <div class="item-picture crop-circle">
-            <!-- <img src="{{itemImage}}" alt="Feed Portrait" class="img-responsive"> -->
-            <img src="http://placehold.it/350x350" alt="Feed Portrait" class="img-responsive">
+    <div class="tweet-container">
+        <div class="tweet-media">
+
+            {{> FeedItemMedia media=tweet.media}}
+
         </div>
-        <div class="item-details">
-            <p class="item-text">{{itemText}}</p>
-            <small class="item-author">{{itemAuthor}}</small>
+        <div class="tweet-content">
+            <span class="tweet-text">{{tweet.text}}</span>
+            <span class="tweet-affiliation">{{affiliation}}</span>
+            <span class="user-name">{{user.name}}</span>
+            <span class="user-handle">{{user.handle}}</span>
+            <span class="user-followers">{{user.followers_count}}</span>
+            <span class="user-statuses">{{user.statuses_count}}</span>
+            <span class="user-followers_count">{{user.followers_count}}</span>
+            <span class="user-website_url">{{user.website_url}}</span>
         </div>
     </div>
+</template>
+
+
+
+
+<template name="FeedItemMedia">
+    {{#with media}}
+        {{#if isMovie}}
+            <video  class="media movie"
+                    width="{{size.w}}"
+                    height="{{size.h}}"
+                    poster=""
+                    controls="controls"
+                    preload="true" >
+
+                <!-- MP4 Video -->
+                {{#each variants}}
+                    <source type="{{content_type}}" src="{{url}}" />
+                {{/each}}
+            </video>
+        {{else}}
+            <video  class="media gif"
+                    width="{{size.w}}"
+                    height="{{size.h}}"
+                    poster=""
+                    preload="true" >
+
+                <!-- Gif in MP4 Format -->
+                {{#each variants}}
+                    <source type="{{content_type}}" src="{{url}}" />
+                {{/each}}
+            </video>
+        {{/if}}
+    {{/with}}
 </template>

@@ -1,0 +1,1 @@
+GifElections = {}; // The only time we ever declare a global variable
