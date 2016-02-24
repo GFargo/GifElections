@@ -1,0 +1,73 @@
+<!-- Indivdual Tweet -->
+<template name="Item">
+
+    <div class="row">
+        <article class="item-container col-sm-12 col-md-7">
+            <div class="item">
+                <div class="item-media">
+
+                    {{> ItemMedia media=tweet.media}}
+
+                </div>
+                <div class="item-content">
+                    <span class="item-text">{{formatTextForHTML tweet.text}}</span>
+                    <span class="item-affiliation">{{affiliation}}</span>
+
+                    <span class="user-name">{{user.name}}</span>
+                    <span class="user-handle">{{user.handle}}</span>
+                    <span class="user-followers">{{user.followers_count}}</span>
+                    <span class="user-statuses">{{user.statuses_count}}</span>
+                    <span class="user-followers_count">{{user.followers_count}}</span>
+                    <span class="user-website_url">{{user.website_url}}</span>
+                </div>
+            </div>
+        </article>
+        <div class="meta col-sm-12 col-md-5">
+
+            <div class="item-meta csstransforms">
+
+                <div class="timestamp">
+                    <span class="from">{{fromNow tweet.meta.created_at}}</span>
+                    <span class="date">{{calendar tweet.meta.created_at}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</template>
+
+
+
+
+<template name="ItemMedia">
+
+    {{#if isMovie}}
+        <video  class="media movie"
+                width="{{size.w}}"
+                height="{{size.h}}"
+                poster=""
+                controls="controls"
+                style="width:100%; height:100%;"
+                preload="true" >
+
+            <!-- MP4 Video -->
+            {{#each variants}}
+                <source type="{{content_type}}" src="{{url}}" />
+            {{/each}}
+        </video>
+    {{else}}
+        <video  class="media gif"
+                width="{{size.w}}"
+                height="{{size.h}}"
+                poster=""
+                preload="true" >
+
+            <!-- Gif in MP4 Format -->
+            {{#each variants}}
+                <source type="{{content_type}}" src="{{url}}" />
+            {{/each}}
+        </video>
+    {{/if}}
+
+</template>

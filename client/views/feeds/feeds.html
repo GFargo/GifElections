@@ -1,5 +1,5 @@
 <template name="Feeds">
-	<div class="feeds-container flex-container flex-row flex-wrap flex-center">
+	<div class="feeds-container row">
 		{{#each feeds}}
 			{{> FeedCard}}
 		{{else}}
@@ -10,22 +10,24 @@
 
 
 <template name="FeedCard">
-	<div class="card-container  text-center">
-		<div class="image-container crop-container">
-			<div class="card-portrait crop-circle">
+	<div class="col-sm-12 col-md-6">
+		<div class="card-container">
+
+			<div class="card-portrait crop-block crop-circle">
 				<img src="{{profile_image}}" alt="placeholder" class="img-responsive">
 			</div>
+
+			<h3 class="card-name">{{name}}</h3>
+			<div class="card-content">
+				<a href="{{pathFor route='feed'}}" class="btn btn-primary">Full Feed</a>
+			</div>
+			<ul class="tag-list nav nav-pills">
+				{{#each hashtags}}
+					<li class="hashtag"><a data-query-tag="{{tag}}"><i class="fa fa-tag"></i> {{tag}}</a></li>
+				{{else}}
+					<li>No Tags Found</li>
+				{{/each}}
+			</ul>
 		</div>
-		<h3 class="name">{{name}}</h3>
-		<div class="card-content">
-			<a href="{{pathFor route='feed'}}" class="btn btn-primary">Full Feed</a>
-		</div>
-		<ul class="nav nav-pills">
-			{{#each hashtags}}
-				<li class="hashtag"><a data-query-tag="{{tag}}"><i class="fa fa-tag"></i> {{tag}}</a></li>
-			{{else}}
-				<li>No Tags Found</li>
-			{{/each}}
-		</ul>
 	</div>
 </template>

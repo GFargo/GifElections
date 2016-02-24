@@ -2,7 +2,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>
-		The Gif Elections
+		Polling.Press
 	</title>
 </head>
 <template name="layout">
@@ -20,25 +20,9 @@
  -->
 <template name="PublicLayout">
 	<div id="wrap">
-		<!-- left navbar -->
-		<div class="navbar navbar-default" role="navigation">
-			<div class="navbar-container">
-				<div class="navbar-left-toggle hidden">
-					<a class="" data-toggle="visible" data-target=".navbar-left">
-						<i class="fa fa-close"></i>
-					</a>
-				</div>
-				<div id="menu" class="navbar-aside visible">
-					{{> MainMenu}}
-				</div>
-			</div>
-		</div>
+		{{> Navbar}}
 
-
-		<!-- Admin Controls -->
-		<div class="admin-bar">
-			<a href="#" class="btn btn-sm batch-refresh btn-primary">Batch Refresh</a>
-		</div>
+		{{> AdminControls}}
 
 		<!-- Yield -->
 		<div class="yield-container container-fluid">
@@ -50,6 +34,35 @@
 
 
 
+<!-- fixed left navbar -->
+<template name="Navbar">
+	<div class="navbar navbar-default" role="navigation">
+		<div class="navbar-container">
+			<div class="navbar-left-toggle hidden">
+				<a class="" data-toggle="visible" data-target=".navbar-left">
+					<i class="fa fa-close"></i>
+				</a>
+			</div>
+			<div id="menu" class="navbar-aside visible">
+				{{> MainMenu}}
+			</div>
+		</div>
+	</div>
+</template>
+
+
+
+<!-- Admin Controls -->
+<template name="AdminControls">
+	<div class="admin-controls">
+	    <a href="#" class="btn batch-refresh btn-primary">Batch Refresh</a>
+	</div>
+</template>
+
+
+
+
+
 <!--
 
 	PrivateLayout
@@ -57,25 +70,9 @@
  -->
 <template name="PrivateLayout">
 	<div id="wrap">
-		<!-- left navbar -->
-		<div class="navbar navbar-default" role="navigation">
-			<div class="navbar-container">
-				<div class="navbar-left-toggle hidden">
-					<a class="" data-toggle="visible" data-target=".navbar-left">
-						<i class="fa fa-close"></i>
-					</a>
-				</div>
-				<div id="menu" class="navbar-aside visible">
-					{{> MainMenu}}
-				</div>
-			</div>
-		</div>
+		{{> Navbar}}
 
-
-		<!-- Admin Controls -->
-		<div class="admin-controls">
-		    <a href="#" class="btn batch-refresh btn-primary">Batch Refresh</a>
-		</div>
+		{{> AdminControls}}
 
 		<!-- Yield -->
 		<div class="yield-container">
@@ -85,7 +82,7 @@
 	<div id="footer">
 		<div class="footer-container container">
 			<p class="text-muted">
-				Collecting all the Gif chatter around the 2016 Presidential Elections
+				Collecting all the chatter around the 2016 Presidential Elections
 			</p>
 		</div>
 	</div>

@@ -38,7 +38,18 @@ Template.PublicLayout.events({
 	'click .slideToggle': function() {
 		var clickedElement = event.target;
 		// add/remove CSS classes to clicked element
+	},
+
+
+	'click .batch-refresh': function (event, template){
+	 // use template here directly or if you need the data of an
+	 // iteratee use Blaze.getData(event.currentTarget)
+	 console.log('--------------------------------');
+	 console.log('...Batch Refresh Started...');
+	 console.log('--------------------------------');
+	 Meteor.call('batchRefresh', template.data.handle, 50);
 	}
+
 });
 
 

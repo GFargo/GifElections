@@ -16,8 +16,10 @@ caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.1.0
 chrismbeckett:toastr@2.1.2_1
+coffeescript@1.0.11
 copleykj:livestamp@1.1.7
 dburles:collection-helpers@1.0.4
+dburles:iron-router-query-array@1.0.1
 ddp@1.2.2
 ddp-client@1.2.1
 ddp-common@1.2.2
@@ -29,6 +31,7 @@ diff-sequence@1.0.1
 ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
+electronifiejs:pages@1.8.8
 email@1.0.8
 fastclick@1.0.7
 fortawesome:fontawesome@4.5.0
@@ -53,6 +56,7 @@ less@2.5.1
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
+lookback:emoji@0.3.1
 matb33:collection-hooks@0.8.1
 mdg:validation-error@0.1.0
 meteor@1.1.10
@@ -67,7 +71,9 @@ mobile-status-bar@1.0.6
 momentjs:moment@2.10.6
 mongo@1.1.3
 mongo-id@1.0.1
+mrt:jquery-imagesloaded@0.0.2
 mrt:twit@0.2.0
+natestrauser:animate-css@3.4.0
 npm-container@1.0.0
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7

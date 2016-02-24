@@ -8,7 +8,18 @@ Meteor.startup(function() {
 
 
 
+	// Import Feeds
+	Meteor.call('importFeeds', GifElections.Twitter.config.feeds);
+
+
+	// Fetch New Feed Info
+	_.each(GifElections.Twitter.config.feeds, function(feed) {
+	    Meteor.call('fetchFeedInfo', feed);
+	});
+
+
 });
+
 
 
 

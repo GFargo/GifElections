@@ -1,15 +1,16 @@
 Meteor.subscribe("feeds");
-Meteor.subscribe("items");
 
 
 this.App = {};
 this.Helpers = {};
 
-
-
 Meteor.startup(function() {
 
+
+
 });
+
+
 
 
 
@@ -45,6 +46,19 @@ Helpers.menuItemClass = function(routeName) {
 ////////////////////////////////
 
 
+// Time Helpers
+Helpers.fromNow = function (time) {
+	if(time) {
+		return moment(time, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en').fromNow();
+	}
+}
+Helpers.calendar = function (time) {
+	if(time) {
+		return moment(time, 'dd MMM DD HH:mm:ss ZZ YYYY', 'en').calendar();
+	}
+}
+
+// Type Helpers
 Helpers.booleanToYesNo = function(b) {
 	return b ? "Yes" : "No";
 };

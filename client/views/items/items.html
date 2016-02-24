@@ -1,0 +1,20 @@
+<template name="Items">
+    <section class="item-list">
+        {{#each items}}
+            {{> Item}}
+        {{else}}
+            <h3 class="label-danger label">Apologies, No Items Found</h3>
+        {{/each}}
+    </section>
+
+    <div class="page-controls">
+    {{#if Template.subscriptionsReady}}
+        {{#if hasMorePosts}}
+            <button class="btn load-more btn-primary">Load More</button>
+        {{/if}}
+    {{else}}
+        {{>spinner}}
+    {{/if}}
+    </div>
+    <!-- {{> pages}} --> <!-- {{> pagesNav}} -->
+</template>

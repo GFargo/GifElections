@@ -17,20 +17,6 @@ GifElections.Twitter = (function(){
 
 
 
-// Import Feeds
-Meteor.call('importFeeds', GifElections.Twitter.config.feeds);
-
-
-
-
-// Fetch New Feed Info
-_.each(GifElections.Twitter.config.feeds, function(feed) {
-    // console.log('Feed:', feed);
-    Meteor.call('fetchFeedInfo', feed);
-});
-
-
-
 // Grab First Feed & Create Stream
 // Meteor.call('createStream', TwitterConf.feeds[1].handle, 'user');
 

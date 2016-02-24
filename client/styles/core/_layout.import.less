@@ -1,3 +1,8 @@
+html * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 *,*:before,*:after { box-sizing: border-box; }
 
 
@@ -17,29 +22,52 @@ h6 a, h6 a:hover {
 
 /* Wrapper for page content to push down footer */
 #wrap {
-  min-height: 100%;
-  height: auto;
-  /* Negative indent footer by its height */
-  margin: 0 auto (@footer_height * -1);
-  /* Pad bottom by footer height */
-  padding: 0 0 @footer_height;
+    position: relative;
+    height: auto;
+    z-index: auto;
+    min-height: 100%;
+    width: 100%;
+    display: block;
+    /* Negative indent footer by its height */
+    margin: 0 auto (@footer_height * -1);
+    /* Pad bottom by footer height */
+    padding: 0 0 @footer_height;
+
+
+
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    background-color: #eeeeee;
+    background-image: url("http://www.transparenttextures.com/patterns/concrete-wall.png");
+
 }
 
 
 
 .yield-container {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 10;
     padding-left: @navbar_width;
     padding-right: 0;
+    padding-bottom: 18px;
+
 }
 
 
 
 // Admin Bar
-.admin-bar {
-    background: #333;
+.admin-controls {
+    background-color: @color-navy;
     padding-left: @navbar_width;
     text-align: right;
 }
+
+.btn-primary {
+    background-color: #2B5E93;
+    border-color: #2B5E93;
+}
+
 
 
 // Navbar
@@ -48,9 +76,21 @@ h6 a, h6 a:hover {
 }
 .navbar {
     position: fixed;
+    z-index: 25;
     width: @navbar_width;
     height: 100%;
+
+    .nav a {
+        color: @color-blue;
+    }
+    .nav > li > a:hover,
+    .nav > li > a:focus {
+        transition: all ease-in .25s;
+        background-color: @color-blue;
+        color: #fff;
+    }
 }
+
 
 .nav-stacked li {
     margin-top: 2px;
@@ -59,6 +99,42 @@ h6 a, h6 a:hover {
 .nav-tabs {
     margin-bottom: 10px;
 }
+
+
+
+
+@media (min-width : @screen-md) {
+    .item-list {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        padding: 2em 64px;
+
+        &::before {
+            left: 75%;
+            margin-left: -2px;
+        }
+    }
+    .item {
+
+        &:after {
+            display: block;
+            position: absolute;
+            content: '';
+            height: 3px;
+            top: 160px;
+            width: 230px;
+            right: -230px;
+            background-color: #d7e4ed;
+        }
+    }
+}
+
+@media (max-width : @screen-md) {
+    // .item-container {
+    //     max-width: 480px;
+    // }
+}
+
 
 
 // Footer

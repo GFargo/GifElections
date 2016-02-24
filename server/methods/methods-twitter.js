@@ -20,7 +20,7 @@ Meteor.methods({
             throw new Meteor.Error('no-data',
                 "Missing params for batch refresh");
 
-        const   maxQueries = 2;
+        const   maxQueries = 5;
 
 
         // Loop through setting previous return as the value to be used next as query params
@@ -37,11 +37,11 @@ Meteor.methods({
                             queryParams.exclude_replies = true, // TODO FEATURE: Add Replies?!
                             queryParams.first_query = true,
                             queryParams.batch_refresh = true,
-                            queryParams.max_id = (typeof feed.feedInfo.max_id !== 'undefined' ? feed.feedInfo.max_id : undefined);
+                            // queryParams.max_id = (typeof feed.feedInfo.max_id !== 'undefined' ? feed.feedInfo.max_id : undefined);
 
-                    console.log('---------');
-                    console.log('Fresh Query:', queryParams);
-                    console.log('---------');
+                    // console.log('---------');
+                    // console.log('Fresh Query:', queryParams);
+                    // console.log('---------');
 
                     Meteor.call('fetchTweets', queryParams);
                     console.log('\n-- Current Batch Request: ', ind);
@@ -70,8 +70,11 @@ Meteor.methods({
                 console.log(err);
                 throw new Meteor.Error('error', err);
             }
-
-            if (( data == null || data == undefined ) && response.statusCode == '200') {
+            if (data.length < 1) {
+                console.log('Malformed Data? ', data.length, data);
+                console.log();
+            }
+            if (( data == null || data == undefined || data.length < 1) && response.statusCode == '200') {
                 console.log('NO MORE DATA - EXITING NOW');
                 return;
             }
@@ -99,27 +102,35 @@ Meteor.methods({
                 screen_name: query.handle,
                 count: query.chunk_size ,
                 since_id: query.since_id,
-                max_id: query.max_id,
+                // max_id: query.max_id,
                 exclude_replies: query.exclude_replies
             }, twitterGetResponseHandler
         );
+
         return query;
     },
 
     parseTweets: function(tweets = 'undefined') {
         // console.log('data:', data);
         const data = tweets;
-        // Filter Response
-        let goldenTweets = _.filter(data, function(tweet, key, list) {
-            console.log('... maping ... key:', key, ' / id:', data[key].id_str, ' ...');
-            return GifElections.Twitter.helpers.checkTweetForMedia(tweet);
-        });
+        if (data.length > 1) {
 
-        console.log('--------- PARSE COMPLETE / Last Tweet "max_id": ', data[data.length - 1].id_str, ' ---------');
-        if (!_.isEmpty(goldenTweets)) {
-            return goldenTweets;
-        } else{
-            console.log('... no golden tweets found ...');
+            // Filter Response
+            let goldenTweets = _.filter(data, function(tweet, key, list) {
+                // console.log('... maping ... key:', key, ' / id:', data[key].id_str, ' ...');
+                return GifElections.Twitter.helpers.checkTweetForMedia(tweet);
+            });
+
+            console.log('... PARSE COMPLETE / Last Tweet "max_id": ', data[data.length - 1].id_str, ' ...');
+            if (!_.isEmpty(goldenTweets)) {
+                return goldenTweets;
+            } else{
+                console.log('... no golden tweets found ...');
+            }
+
+        } else {
+            console.log('End of Data?');
+            console.log(data);
         }
     },
 
@@ -143,6 +154,7 @@ Meteor.methods({
                 item                                = {};
 
                 item.feed                           = query.handle,
+                item.createdDate                    = new Date,
                 item.affiliation                    = query.affiliation,
 
                 // User
@@ -285,15 +297,13 @@ Meteor.methods({
                         if (error) {
                             console.log('failed to update feed:', data.handle, error );
                         }
-                        console.log("Feed Update: ", result);
+                        console.log("Refreshed Feed: ", feed.handle);
                     }
                 );
 
                 return data;
             }
         });
-
-        console.log('Refreshing: ', feed.handle);
 
         GifElections.Twitter.api.get('users/show',
             {

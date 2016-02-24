@@ -43,7 +43,7 @@ Meteor.methods({
                         if (error)
                             throw new Meteor.error('upsert-failed', error);
 
-                        console.log(result);
+                        console.log("Upserted Feed:", result);
                     }
                 );
             }
@@ -57,12 +57,12 @@ Meteor.methods({
             throw new Meteor.error('no-data',
                 'Please provide update data for updateFeedId() to run properly');
 
-        console.log(' --------------- | updateFeedId() | --------------- ');
-        console.log('New Data:', feedData);
-        console.log('------------------------------------------');
-
         let max_id = (!_.isEmpty(feedData.max_id) ? feedData.max_id : '');
         let since_id = (!_.isEmpty(feedData.since_id) ? feedData.since_id : '');
+
+
+        console.log(' --------------- | updateFeedId() | --------------- ');
+        // console.log('New Data:', feedData);
 
         // ToDo: Change to just updating one or two items in Mongo entry i.e. max_id & since_id
         Feeds.update (
@@ -80,6 +80,8 @@ Meteor.methods({
                 console.log("Update Result: ", result);
             }
         );
+
+        console.log('------------------------------------------');
     },
 
     updateFeed: function (data = undefined) {}

@@ -14,6 +14,14 @@ var freeRoutes = [
 	"about"
 ];
 
+// get a handle for the controller.
+// in a template helper this would be
+// var controller = Iron.controller();
+var controller = this;
+
+// reactive getParams method which will invalidate the comp if any part of the params change
+// including the hash.
+// var params = controller.getParams();
 
 Router.onBeforeAction(function() {
 	// loading indicator here
@@ -42,7 +50,7 @@ Router.map(function () {
 // Handles
 Router.route('/feed/:handle', {
 	name: "feed",
-	template: 'SingleFeed',
+	template: 'Feed',
 	data: function(){
 		console.log("Route >> Handle >> ", this.params);
 		return {
@@ -53,8 +61,9 @@ Router.route('/feed/:handle', {
 
 // Hashtags
 Router.route('/tag/:hashtag', {
-	name: "TagList",
+	name: "tags",
 	data: function(){
 		console.log("Route >> Hashtag >> ", this.params);
 	}
 });
+
