@@ -28,6 +28,25 @@
             }
         },
         {
+            "name": "Tech Crunch",
+            "handle": "TechCrunch",
+            "hashtags": [
+                { "tag": "WebDev" },
+                { "tag": "FutureTech" },
+                { "tag": "California" }
+            ],
+            "feedInfo": {
+                "affiliation": "news",
+                "portrait": {
+                    "url": "",
+                    "size": "",
+                    "caption": ""
+                },
+                "description": "",
+                "website": ""
+            }
+        },
+        {
             "name": "Hillary Clinton",
             "handle": "HillaryClinton",
             "hashtags": [

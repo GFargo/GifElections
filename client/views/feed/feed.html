@@ -6,13 +6,12 @@
     </section>
 
 
-
     {{#if Template.subscriptionsReady}}
         {{> Items}}
     {{else}}
-
-        {{> spinner}}
-
+        <div class="spinner-center-container">
+            {{> spinner}}
+        </div>
     {{/if}}
 
 </template>
