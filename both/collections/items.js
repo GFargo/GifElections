@@ -144,9 +144,21 @@ this.Schemas.MetaSchema = new SimpleSchema({
         type: String,
         defaultValue: 'en'
     },
-    timestamp_ms: {
-        type: String,
-        optional: true,
+    timestamp: {
+        type: Date,
+        // AutoValue was causing bug with Upsert
+        // optional: true,
+        // autoValue: function() {
+        //     console.log('Autoform: ', this);
+        //     var twitter_date = this.field("tweet.meta.created_at");
+        //     // if (this.isInsert) {
+        //     if (twitter_date.isSet) {
+        //         return new Date(Date.parse(twitter_date.value));
+        //     } else {
+        //         return;
+        //     }
+        //     // }
+        // }
     },
     created_at: {
         type: String
@@ -178,6 +190,18 @@ this.Schemas.TweetSchema = new SimpleSchema({
 this.Schemas.Items = new SimpleSchema({
     feed: {
         type: String
+    },
+    createdAt: {
+        type: Date,
+        autoValue: function() {
+            if (this.isInsert) {
+                return new Date();
+            } else if (this.isUpsert) {
+                return {$setOnInsert: new Date()};
+            } else {
+                this.unset();  // Prevent user from supplying their own value
+            }
+        }
     },
     affiliation: {
         type: String

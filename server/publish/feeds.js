@@ -1,6 +1,6 @@
 Meteor.publish('feeds', function (handle) {
 
-    console.log('Publish This:', this._session);
+    // console.log('... Feeds Published ... this.session:', this._session);
     var feeds = Feeds.find();
 
     if (feeds) {

@@ -68,6 +68,9 @@
 
 
 .page-controls {
+    display: block;
+    width: 100%;
+    min-height: 42px;
     text-align: center;
     position: relative;
 }
@@ -119,11 +122,36 @@
         text-transform: uppercase;
         color: @gray;
         position: absolute;
-        top: 130px;
+        top: 140px;
         left: 155px;
 
         span {
             display: block;
+            -webkit-transition: transform .2s ease-in-out, opacity .15s ease-out;
+               -moz-transition: transform .2s ease-in-out, opacity .15s ease-out;
+                -ms-transition: transform .2s ease-in-out, opacity .15s ease-out;
+                 -o-transition: transform .2s ease-in-out, opacity .15s ease-out;
+                    transition: transform .2s ease-in-out, opacity .15s ease-out;
+        }
+        .timestamp-inner {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .date {
+            background: #fff;
+            position: absolute;
+            top: 0;
+            transform: translateX(-100%);
+        }
+
+        .timestamp-inner:hover {
+            .date {
+                transform: translateX(0);
+            }
+            .from {
+                opacity: 0;
+            }
         }
     }
 }

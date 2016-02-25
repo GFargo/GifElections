@@ -69,12 +69,21 @@ Template.ItemMedia.onRendered(function() {
             AndroidUseNativeControls: false,
             pauseOtherPlayers: false,
             enablePluginSmoothing: true,
-            videoWidth: template.data.media.size.w,
-            videoHeight: template.data.media.size.h,
+            // videoWidth: template.data.media.size.w,
+            // videoHeight: template.data.media.size.h,
             features: ['playpause','loop', 'fontawesome'],
             success: function (mediaElement, domObject) {
                 mediaElement.addEventListener('canplay', function(e) {
-                    mediaElement.play();
+                    console.log('Canplay Callback', mediaElement, domObject);
+
+                    $(mediaElement).closest('.item-media').on('mouseenter', function(event) {
+                        console.log('Mouse Enter');
+                        mediaElement.play();
+                    }).on('mouseleave', function(event) {
+                         console.log('Mouse Leave');
+                        mediaElement.pause();
+                    });
+
                 }, false);
             },
         }

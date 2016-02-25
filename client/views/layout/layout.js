@@ -47,7 +47,7 @@ Template.PublicLayout.events({
 	 console.log('--------------------------------');
 	 console.log('...Batch Refresh Started...');
 	 console.log('--------------------------------');
-	 Meteor.call('batchRefresh', template.data.handle, 50);
+	 Meteor.call('batchRefresh', template.data.handle, 200);
 	}
 
 });

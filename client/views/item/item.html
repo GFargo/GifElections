@@ -27,8 +27,10 @@
             <div class="item-meta csstransforms">
 
                 <div class="timestamp">
-                    <span class="from">{{fromNow tweet.meta.created_at}}</span>
-                    <span class="date">{{calendar tweet.meta.created_at}}</span>
+                    <div class="timestamp-inner">
+                        <span class="from">{{fromNow tweet.meta.created_at}}</span>
+                        <span class="date"><i class="fa fa-calendar"></i> {{calendar tweet.meta.created_at}}</span>
+                    </div>
                 </div>
 
             </div>
@@ -49,7 +51,7 @@
                 poster=""
                 controls="controls"
                 style="width:100%; height:100%;"
-                preload="true" >
+                preload="false" >
 
             <!-- MP4 Video -->
             {{#each variants}}

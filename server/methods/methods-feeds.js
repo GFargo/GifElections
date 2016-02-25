@@ -61,7 +61,7 @@ Meteor.methods({
         let since_id = (!_.isEmpty(feedData.since_id) ? feedData.since_id : '');
 
 
-        console.log(' --------------- | updateFeedId() | --------------- ');
+        console.log('--------------- | updateFeedId() | ---------------');
         // console.log('New Data:', feedData);
 
         // ToDo: Change to just updating one or two items in Mongo entry i.e. max_id & since_id
@@ -77,11 +77,9 @@ Meteor.methods({
                     console.log('failed to update feed:', feedData.handle, error );
                 }
 
-                console.log("Update Result: ", result);
+                console.log("Updated Feed IDs Result: ", result, ' new max: ', max_id, ' new since: ', since_id);
             }
         );
-
-        console.log('------------------------------------------');
     },
 
     updateFeed: function (data = undefined) {}

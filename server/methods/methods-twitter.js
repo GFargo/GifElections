@@ -20,7 +20,8 @@ Meteor.methods({
             throw new Meteor.Error('no-data',
                 "Missing params for batch refresh");
 
-        const   maxQueries = 5;
+        // const   maxQueries = 3;
+        const   maxQueries = 16;
 
 
         // Loop through setting previous return as the value to be used next as query params
@@ -30,14 +31,16 @@ Meteor.methods({
                 Meteor.setTimeout(function(){
 
                     let     feed = Feeds.findOne({handle: feedHandle});
+
                             // Define query object
                             queryParams.handle = feed.handle,
                             queryParams.affiliation = feed.feedInfo.affiliation,
                             queryParams.chunk_size = chunkSize,
                             queryParams.exclude_replies = true, // TODO FEATURE: Add Replies?!
-                            queryParams.first_query = true,
+                            queryParams.first_query = (maxQueries - (i + 1) === 0 ? true : false),
                             queryParams.batch_refresh = true,
-                            // queryParams.max_id = (typeof feed.feedInfo.max_id !== 'undefined' ? feed.feedInfo.max_id : undefined);
+                            queryParams.since_id = (typeof feed.feedInfo.since_id !== 'undefined' ? feed.feedInfo.since_id : undefined),
+                            queryParams.max_id = (typeof feed.feedInfo.max_id !== 'undefined' ? feed.feedInfo.max_id : undefined);
 
                     // console.log('---------');
                     // console.log('Fresh Query:', queryParams);
@@ -102,7 +105,7 @@ Meteor.methods({
                 screen_name: query.handle,
                 count: query.chunk_size ,
                 since_id: query.since_id,
-                // max_id: query.max_id,
+                max_id: query.max_id,
                 exclude_replies: query.exclude_replies
             }, twitterGetResponseHandler
         );
@@ -117,7 +120,7 @@ Meteor.methods({
 
             // Filter Response
             let goldenTweets = _.filter(data, function(tweet, key, list) {
-                // console.log('... maping ... key:', key, ' / id:', data[key].id_str, ' ...');
+                console.log('... maping ... key:', key, ' / id:', data[key].id_str, ' ...');
                 return GifElections.Twitter.helpers.checkTweetForMedia(tweet);
             });
 
@@ -200,7 +203,7 @@ Meteor.methods({
                 item.tweet.meta.favorite_count      = tweet.favorite_count,
                 item.tweet.meta.possibly_sensitive  = tweet.possibly_sensitive,
                 item.tweet.meta.lang                = tweet.lang,
-                item.tweet.meta.timestamp_ms        = GifElections.Twitter.helpers.getTimestampMs(tweet.timestamp_ms),
+                item.tweet.meta.timestamp           = new Date(Date.parse(tweet.created_at)),
                 item.tweet.meta.created_at          = tweet.created_at;
 
         // Retweet Status
@@ -208,9 +211,9 @@ Meteor.methods({
             console.log('--- Found Retweet Status ---');
         }
 
-        console.log('--- ITEM to STORE ---');
-        console.log(item);
-        console.log('---------------------');
+        // console.log('--- ITEM to STORE ---');
+        // console.log(item);
+        // console.log('---------------------');
 
         // Insert Tweet into Database
         // Items.insert(item, function(error){
@@ -228,7 +231,8 @@ Meteor.methods({
             function (error, result) {
                 if (error) {
                     // throw new Meteor.error('upsert-failed', error);
-                    console.log('failed to update feed:', item.user.handle, item.tweet.id, error );
+                    console.log('failed to update feed:', item.user.handle, item.tweet.id );
+                    console.log('Error: ', error);
                 } else {
                     console.log('--- STORED ---');
                     console.log(result);

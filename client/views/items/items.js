@@ -37,7 +37,7 @@ Template.Items.onCreated(function() {
 
     template.items = function() {
         console.log('querying items');
-        return Items.find({feed: template.data.handle}, {limit: template.loaded.get()});
+        return Items.find({feed: template.data.handle}, {limit: template.loaded.get(), sort: {"tweet.meta.timestamp": -1}});
         // return Items.find({}, {limit: template.loaded.get()});
     }
 

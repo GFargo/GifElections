@@ -31,7 +31,7 @@ h6 a, h6 a:hover {
     /* Negative indent footer by its height */
     margin: 0 auto (@footer_height * -1);
     /* Pad bottom by footer height */
-    padding: 0 0 @footer_height;
+    padding: 43px 0 @footer_height;
 
 
 
@@ -41,6 +41,9 @@ h6 a, h6 a:hover {
 
 }
 
+.page-container {
+    padding: 0 32px;
+}
 
 
 .yield-container {
@@ -61,6 +64,12 @@ h6 a, h6 a:hover {
     background-color: @color-navy;
     padding-left: @navbar_width;
     text-align: right;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
 }
 
 .btn-primary {
